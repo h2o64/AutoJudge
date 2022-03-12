@@ -2,9 +2,6 @@ click
 ramp-workflow
 ramp-utils
 numpy
-scikit-learn>=0.22
+scikit-learn
 pandas
-matplotlib
-seaborn
 osfclient
-scipy
