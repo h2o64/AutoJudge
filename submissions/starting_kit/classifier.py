@@ -76,6 +76,19 @@ class ColumnsTextVectorizer():
   def fit_transform(self, X, y=None):
     return self.fit(X, y).transform(X)
 
+# Fix the warnings from _check_X_y
+class WarningFixerTransformer:
+
+  def transform(self, X, **transform_params):
+    # Convert X to np.array
+    return np.asarray(X)
+
+  def fit(self, X, y=None, **fit_params):
+    return self
+
+  def fit_transform(self, X, y=None):
+    return self.fit(X, y).transform(X)
+
 # Classifier
 class Classifier(BaseEstimator):
     def __init__(self):
@@ -91,6 +104,7 @@ class Classifier(BaseEstimator):
                 columns_multilabel=['heard_by', 'decided_by']
 
             )),
+            ('warnings' , WarningFixerTransformer()),
             ('classifier', self.model)
         ])
 

@@ -33,7 +33,7 @@ _ignore_column_names = ['conclusion', 'votes', 'majority_vote', 'minority_vote',
 
 def _get_data(path=".", f_name="train"):
     data = pd.read_pickle(os.path.join(path, 'data', f_name))
-    y_array = data[_target_column_name].values.reshape(-1, 1) - 1
+    y_array = data[_target_column_name].values - 1
     X_df = data.drop([_target_column_name] + _ignore_column_names, axis=1)
     return X_df, y_array
 
