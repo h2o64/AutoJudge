@@ -65,7 +65,7 @@ class ColumnsTextVectorizer():
     # Transform non-text
     non_texts = X[[c for c in X.columns if c not in self.columns_text + self.columns_multilabel]].values
     # Concatenate everything
-    return np.concatenate(texts + [non_texts], axis=1)
+    return np.asarray(np.concatenate(texts + [non_texts], axis=1))
  
   def fit(self, X, y=None, **fit_params):
     # Fit the vectorizers
@@ -73,19 +73,6 @@ class ColumnsTextVectorizer():
       self.vectorizers[c].fit(X[c])
     return self
  
-  def fit_transform(self, X, y=None):
-    return self.fit(X, y).transform(X)
-
-# Fix the warnings from _check_X_y
-class WarningFixerTransformer:
-
-  def transform(self, X, **transform_params):
-    # Convert X to np.array
-    return np.asarray(X)
-
-  def fit(self, X, y=None, **fit_params):
-    return self
-
   def fit_transform(self, X, y=None):
     return self.fit(X, y).transform(X)
 
@@ -104,7 +91,6 @@ class Classifier(BaseEstimator):
                 columns_multilabel=['heard_by', 'decided_by']
 
             )),
-            ('warnings' , WarningFixerTransformer()),
             ('classifier', self.model)
         ])
 
