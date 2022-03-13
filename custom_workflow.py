@@ -1,12 +1,9 @@
 import os
 
 from rampwf.utils.importing import import_module_from_source
+from rampwf.workflows.classifier import Classifier as RCLF
 
-
-class Classifier(object):
-    def __init__(self, workflow_element_names=['classifier']):
-        self.element_names = workflow_element_names
-        # self.name = 'classifier_workflow'  # temporary
+class Classifier(RCLF):
 
     def train_submission(self, module_path, X_array, y_array, train_is=None,
                          prev_trained_model=None):
@@ -24,8 +21,3 @@ class Classifier(object):
             clf.fit(
                 X_array.iloc[train_is], y_array[train_is], prev_trained_model)
         return clf
-
-    def test_submission(self, trained_model, X_array):
-        clf = trained_model
-        y_proba = clf.predict_proba(X_array)
-        return y_proba
