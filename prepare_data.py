@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import pandas as pd
+import os
+from sklearn.model_selection import train_test_split
+
 # 1 - read in  the data.
 df_train = pd.read_pickle(os.path.join('data', 'train.pkl'))
 df_test = pd.read_pickle(os.path.join('data', 'test.pkl'))
@@ -12,10 +16,10 @@ df_test = pd.read_pickle(os.path.join('data', 'test.pkl'))
 # data will be used as the public data
 df_public = df_train
 
+# specify the random_state to ensure reproducibility
 df_public_train, df_public_test = train_test_split(
-    df_public, test_size=0.2, random_state=57)
-    # specify the random_state to ensure reproducibility
+    df_public, test_size=0.2, random_state=57
+)
 
 df_public_train.to_pickle(os.path.join('data', 'public', 'train.pkl'))
 df_public_test.to_pickle(os.path.join('data', 'public', 'test.pkl'))
-
