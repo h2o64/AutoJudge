@@ -14,16 +14,19 @@ _prediction_label_names = [0, 1]
 Predictions = rw.prediction_types.make_multiclass(label_names=_prediction_label_names)
 
 # Force our own score
-import importlib.util
-custom_workflow_spec = importlib.util.spec_from_file_location("custom_workflow", os.getcwd() + "/custom_workflow.py")
-custom_workflow = importlib.util.module_from_spec(custom_workflow_spec)
-custom_workflow_spec.loader.exec_module(custom_workflow)
+custom_workflow = rw.utils.importing.import_module_from_source(
+        os.path.join(os.getcwd(), 'custom_workflow.py'),
+        'custom_workflow',
+        sanitize=True
+)
 workflow = custom_workflow.Classifier()
 
 # Force our own score
-custom_score_spec = importlib.util.spec_from_file_location("custom_score", os.getcwd() + "/custom_score.py")
-custom_score = importlib.util.module_from_spec(custom_score_spec)
-custom_score_spec.loader.exec_module(custom_score)
+custom_score = rw.utils.importing.import_module_from_source(
+        os.path.join(os.getcwd(), 'custom_score.py'),
+        'custom_score',
+        sanitize=True
+)
 score_types = [ 
     custom_score.F1(name='F1-score')
 ]
