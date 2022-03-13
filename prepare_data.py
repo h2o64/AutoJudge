@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
-
 # 1 - read in  the data.
 df_train = pd.read_pickle(os.path.join('data', 'train.pkl'))
 df_test = pd.read_pickle(os.path.join('data', 'test.pkl'))
