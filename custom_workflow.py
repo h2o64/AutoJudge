@@ -3,6 +3,7 @@ import os
 from rampwf.utils.importing import import_module_from_source
 from rampwf.workflows.classifier import Classifier as RCLF
 
+
 class Classifier(RCLF):
 
     def train_submission(self, module_path, X_array, y_array, train_is=None,
