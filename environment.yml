@@ -3,13 +3,18 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - numpy
-  - scikit-learn>=0.22
-  - scipy
+  - Pillow
+  - bs4
   - click
-  - pandas
+  - geopandas
   - matplotlib
+  - nltk
+  - numpy
+  - pandas
+  - requests-cache
+  - scikit-learn
   - seaborn
+  - textdistance
 
   # Extra requirements
   - tensorflow-gpu
