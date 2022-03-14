@@ -19,6 +19,14 @@ pip install -U -r requirements.txt
 If you are using `conda`, we provide an `environment.yml` file for similar
 usage.
 
+### Download data
+
+Uncompress the data with
+
+```
+python download_data.py
+```
+
 ### Challenge description
 
 Get started with the [dedicated notebook](AutoJudgeChallenge.ipynb)
