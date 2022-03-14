@@ -2,6 +2,7 @@ import os
 import pandas as pd
 from sklearn.model_selection import ShuffleSplit
 import rampwf as rw
+import json
 
 problem_title = "Auto Judge Challenge"
 
@@ -40,19 +41,21 @@ _ignore_column_names = [
 ]
 
 
-def _get_data(path=".", f_name="train"):
-    data = pd.read_pickle(os.path.join(path, 'data', f_name))
+def _get_data(path=".", f_name="train.json"):
+    with open(os.path.join(path, 'data', f_name), 'r') as f:
+        data = json.load(f)
+    data = pd.DataFrame(data)
     y_array = data[_target_column_name].values - 1
     X_df = data.drop([_target_column_name] + _ignore_column_names, axis=1)
     return X_df, y_array
 
 
 def get_train_data(path="."):
-    return _get_data(path, "train.pkl")
+    return _get_data(path, "train.json")
 
 
 def get_test_data(path="."):
-    return _get_data(path, "test.pkl")
+    return _get_data(path, "test.json")
 
 
 def get_cv(X, y):
